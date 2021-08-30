@@ -8,7 +8,7 @@ function createEquilateral(size){
        }
        console.log();
     }
-} 
+}
  const size = process.argv.slice(2);
 a = Number(size);
 if (a<11 && a>1){
