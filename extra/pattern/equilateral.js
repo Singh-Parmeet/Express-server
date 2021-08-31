@@ -11,11 +11,6 @@ function createEquilateral(size){
 }
  const size = process.argv.slice(2);
 let a = Number(size);
-// if (a<11 && a>1){
-//    createEquilateral(a);
-// }
-// else{
-//    console.log("Please enter number between 2 to 10")
-// }
+
 
 export default createEquilateral;
