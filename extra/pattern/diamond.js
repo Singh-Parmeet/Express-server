@@ -1,4 +1,4 @@
-function createDiamondShape(size){
+const createDiamondShape = size => {
    for(var i=1;i<=size;i++){
       for(var s=size-1;s>=i;s--){
          process.stdout.write(" ");
@@ -21,10 +21,6 @@ function createDiamondShape(size){
    }
  }
  const size = process.argv.slice(2);
-a = Number(size);
-if (a<11 && a>1){
-   createDiamondShape(a);
-}
-else{
-   console.log("Please enter number between 2 to 10")
-}
+ let a = Number(size);
+
+export default createDiamondShape;
