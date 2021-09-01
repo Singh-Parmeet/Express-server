@@ -1,6 +1,6 @@
 
 let str: string = '';
-const  createDiamondShape = (n: number) => {
+const  createDiamondShape = (n: number): void => {
    let space: number = n - 1;
    for (let i: number = 0; i < n; i++) {
       for (let j: number = 0; j < space; j++) {
@@ -29,7 +29,4 @@ const  createDiamondShape = (n: number) => {
 };
 
 
-
-// const size:string = process.argv.slice(2);
-// let a:number = Number(size);
 export default createDiamondShape;

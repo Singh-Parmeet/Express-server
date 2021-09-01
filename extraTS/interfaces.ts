@@ -1,7 +1,6 @@
 
-import { getUsers } from './constants';
 
-interface Email1 {
+interface EmailType {
     traineeEmail: string;
     reviewerEmail: string;
 }
@@ -19,4 +18,4 @@ interface Permission {
 
 
 
-export { Email1, GetUsers, Permission };
+export { EmailType, GetUsers, Permission };

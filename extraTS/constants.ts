@@ -1,5 +1,5 @@
-import { Permission } from './interfaces';
-const permission = {
+import { Permission, EmailType } from './interfaces';
+const permission: Permission = {
   getUsers: {
   all: ['head-trainer'],
   read : ['trainee', 'trainer'],
@@ -11,7 +11,7 @@ const permission = {
 
 const { getUsers }  = permission;
 
-const users = [{
+const users: EmailType[] = [{
   traineeEmail: 'trainee1@successive.tech',
   reviewerEmail: 'reviewer1@successive.tech',
 }];

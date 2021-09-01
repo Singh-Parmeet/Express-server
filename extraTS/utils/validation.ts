@@ -1,19 +1,7 @@
-import { Email1 } from '../interfaces';
+import { EmailType } from '../interfaces';
 import { validateEmail } from './helpers';
-// const users = [{
-//   traineeEmail: 'trainee1@successive.tech',
-//   reviewerEmail: 'reviewer1@successive.tech',
-// }]
 
-// We are validating the email which have @successive.tech
-
-// const validateEmail = (email) =>{
-//     const reg = /^[A-Za-z0-9._%+-]+@successive.tech$/
-//     return reg.test(email)
-// }
-
-// Two open arrays are defined in which length and valid email address will be pushed
-function validateUsers(usersArg: Email1[]): void {
+function validateUsers(usersArg: EmailType[]): void {
   const validUsers: string[] = [];
   const invalidUsers: string[] = [];
 

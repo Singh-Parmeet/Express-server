@@ -23,6 +23,5 @@ const createDiamondShape = size => {
  const size = process.argv.slice(2);
  let a = Number(size);
 
-//export default createDiamondShape;
+export default createDiamondShape;
 
-console.log(createDiamondShape());
