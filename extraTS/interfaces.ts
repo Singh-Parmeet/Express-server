@@ -1,22 +1,22 @@
 
-import { getUsers } from "./constants";
+import { getUsers } from './constants';
 
-interface Email1{
+interface Email1 {
     traineeEmail: string;
     reviewerEmail: string;
 }
 
-interface getUsers{
+interface GetUsers {
     all: string[];
     read: string[];
     write: string[];
     delete: string[];
 }
 
-interface permission{
-    getUsers: getUsers;
+interface Permission {
+    getUsers: GetUsers;
 }
 
 
 
-export { Email1, getUsers, permission };
+export { Email1, GetUsers, Permission };

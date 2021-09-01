@@ -1,5 +1,5 @@
-import { permission } from "./interfaces";
-const permission ={
+import { Permission } from './interfaces';
+const permission = {
   getUsers: {
   all: ['head-trainer'],
   read : ['trainee', 'trainer'],
@@ -7,13 +7,13 @@ const permission ={
   delete: [],
 }
 
-}
+};
 
 const { getUsers }  = permission;
 
 const users = [{
   traineeEmail: 'trainee1@successive.tech',
   reviewerEmail: 'reviewer1@successive.tech',
-}]
+}];
 
-export {getUsers, users};
+export { getUsers, users };

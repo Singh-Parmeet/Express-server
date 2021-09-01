@@ -1,5 +1,5 @@
-import { getUsers } from "../interfaces";
-//import permission from "../constants";
+import { GetUsers } from '../interfaces';
+// import permission from "../constants";
 // const permission ={
 //   getUsers: {
 //   all: ['head-trainer'],
@@ -11,13 +11,13 @@ import { getUsers } from "../interfaces";
 // }
 
 // deconstruct the getUsers
-//const { getUsers }  = permission;
+// const { getUsers }  = permission;
 
-const hasPermission = (moduleName: getUsers, role:string, levelofPermission:string) => {
-    return moduleName[levelofPermission].includes(role)
-}
+const hasPermission = (moduleName: GetUsers, role: string, levelofPermission: string) => {
+    return moduleName[levelofPermission].includes(role);
+};
 
-//The output if trainee/trainer/head-trainer has read permission than true otherwise false.
+// The output if trainee/trainer/head-trainer has read permission than true otherwise false.
 
 // console.log(hasPermission(getUsers,"trainee", "read"))
 // console.log(hasPermission(getUsers,"trainee", "write"))
