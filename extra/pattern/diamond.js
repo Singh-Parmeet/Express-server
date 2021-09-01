@@ -24,3 +24,4 @@ const createDiamondShape = size => {
  let a = Number(size);
 
 export default createDiamondShape;
+
