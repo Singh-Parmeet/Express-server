@@ -1,24 +1,29 @@
 import * as express from 'express';
 
+// Exporting the Server
+
 export default class Server {
     app: express.Express;
 
     constructor(private config) {
         this.app = express();
     }
-    setupRoutes() {
+      // Setup the Routes
+
+     setupRoutes() {
         this.app.get('/health-check', (req, res) => {
             res.send('I am OK');
         });
     }
 
+     // Setup the bootstrap
 
-    bootstrap() {
+     bootstrap() {
         this.setupRoutes();
         return this;
     }
 
-    run() {
+     run() {
         const { port, env } = this.config;
         this.app.listen(port, () => {
             console.log(`App started successfully on ${port} in ${env} environment`);
@@ -30,4 +35,3 @@ export default class Server {
 
 
 }
-const server = new Server(123);
