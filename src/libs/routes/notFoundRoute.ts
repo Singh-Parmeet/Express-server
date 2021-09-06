@@ -1,5 +1,6 @@
-export default (req, res, next) => {
+const notFoundRoute = (req, res, next) => {
 
-     // next function execute the middleware
     next({ status: 400, error: 'Not Found', message: 'Invalid route called'});
 };
+
+export default notFoundRoute;
