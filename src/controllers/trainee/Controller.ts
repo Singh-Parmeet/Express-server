@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-const users = [
+const trainee = [
     {
         name: 'Himanshu',
         designation: 'SDE',
@@ -13,33 +13,33 @@ const users = [
         designation: 'SDE II',
     },
 ];
-class User {
-    get(req: Request, res: Response, next: NextFunction) {
+class Trainee {
+    create(req: Request, res: Response, next: NextFunction) {
 
-        return res.status(200).send({message: 'Users fetched successfully', data: users});
+        return res.status(200).send({message: 'Users fetched successfully', data: trainee});
     }
-    post(req: Request, res: Response, next: NextFunction) {
+    read(req: Request, res: Response, next: NextFunction) {
         const {name} = req.body;
         if (!name) {
             res.status(400).send ({message: 'User name is required', error: 'Bad Request'});
         }
         return res.status(200).send({message: 'User added successfully'});
     }
-    put(req: Request, res: Response, next: NextFunction) {
+    update(req: Request, res: Response, next: NextFunction) {
         const {name} = req.body;
-        const newUser = users.find((data) => data.name === name);
-        if (!newUser) {
-            const updateUsers = [...users, {name}];
-            return res.status(201).send({message: 'Users added successfully', data: updateUsers});
+        const newTrainee = trainee.find((data) => data.name === name);
+        if (!newTrainee) {
+            const updateTrainee = [...trainee, {name}];
+            return res.status(201).send({message: 'Users added successfully', data: updateTrainee});
         }
-        return res.status(200).send({message: 'Already exist', data: users});
+        return res.status(200).send({message: 'Already exist', data: trainee});
     }
-    del(req: Request, res: Response, next: NextFunction) {
+    delete(req: Request, res: Response, next: NextFunction) {
         const {name} = req.body;
-        const newUser = users.filter((data) => data.name !== name);
-        return res.status(201).send({message: 'Users deleted successfully', data: newUser});
+        const newTrainee = trainee.filter((data) => data.name !== name);
+        return res.status(201).send({message: 'Users deleted successfully', data: newTrainee});
     }
 
 }
 
-export default new User();
+export default new Trainee();

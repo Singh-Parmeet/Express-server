@@ -1,4 +1,4 @@
-import userRouter from './routes';
+import traineeRouter from './routes';
 
 
-export default userRouter;
+export default traineeRouter;
