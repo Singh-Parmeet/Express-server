@@ -14,11 +14,11 @@ const trainee = [
     },
 ];
 class Trainee {
-    create(req: Request, res: Response, next: NextFunction) {
+    get(req: Request, res: Response, next: NextFunction) {
 
         return res.status(200).send({message: 'Users fetched successfully', data: trainee});
     }
-    read(req: Request, res: Response, next: NextFunction) {
+    create(req: Request, res: Response, next: NextFunction) {
         const {name} = req.body;
         if (!name) {
             res.status(400).send ({message: 'User name is required', error: 'Bad Request'});

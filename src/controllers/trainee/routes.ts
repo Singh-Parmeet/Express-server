@@ -5,8 +5,8 @@ import traineeController from './Controller';
 const router = Router();
 
 router
-     .get('/', traineeController.create)
-     .post('/', traineeController.read)
+     .get('/', traineeController.get)
+     .post('/', traineeController.create)
      .put('/', traineeController.update)
      .delete('/', traineeController.delete);
 
