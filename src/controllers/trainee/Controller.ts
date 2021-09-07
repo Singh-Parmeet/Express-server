@@ -37,10 +37,8 @@ class User {
     del(req: Request, res: Response, next: NextFunction) {
         const {name} = req.body;
         const newUser = users.filter((data) => data.name !== name);
-        return res.status(201).send({message: 'Users added successfully', data: newUser});
+        return res.status(201).send({message: 'Users deleted successfully', data: newUser});
     }
-
-
 
 }
 
