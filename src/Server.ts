@@ -1,7 +1,7 @@
 import * as express from 'express';
 import * as bodyparser from 'body-parser';
 import { errorHandler, notFoundRoute } from './libs/routes';
-
+import routes from './router';
 
 // Exporting the Server
 export default class Server {
@@ -17,11 +17,7 @@ export default class Server {
          this.app.get('/health-check', (req, res) => {
             res.send('I am OK');
         });
-
-         this.app.post('/data', (req, res, next) => {
-             console.log('post request', req.body);
-             res.send('I am Ok');
-            });
+         this.app.use('/api', routes);
          this.app.use(notFoundRoute);
          this.app.use(errorHandler);
 
