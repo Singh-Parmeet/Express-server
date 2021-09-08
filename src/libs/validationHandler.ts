@@ -1,12 +1,12 @@
-import { checkSchema, validationResult } from 'express-validator';
+import { checkSchema, validationResult } from 'express-validator/check';
 
-const validationHandler = ( validator ) => {
-    return[
+const validationHandler = (validator) => {
+    return [
         checkSchema(validator),
-        ( req, res, next ) => {
+        (req, res, next) => {
             const errors = validationResult(req);
-            if ( !errors.isEmpty() ) {
-                next({message: 'Bad Request', status: 422, error: errors.array()});
+            if (!errors.isEmpty()) {
+                next({ message: 'Bad Request', status: 422, error: errors.array() });
             }
             next();
         }

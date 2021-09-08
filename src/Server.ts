@@ -11,31 +11,31 @@ export default class Server {
         this.app = express();
     }
 
-        // Setup the Routes
+    // Setup the Routes
 
-     setupRoutes() {
-         this.app.get('/health-check', (req, res) => {
+    setupRoutes() {
+        this.app.get('/health-check', (req, res) => {
             res.send('I am OK');
         });
-         this.app.use('/api', routes);
-         this.app.use(notFoundRoute);
-         this.app.use(errorHandler);
+        this.app.use('/api', routes);
+        this.app.use(notFoundRoute);
+        this.app.use(errorHandler);
 
     }
 
-     initBodyParser() {
-         this.app.use(bodyparser.urlencoded({extended: false}));
-         this.app.use(bodyparser.json());
-        }
-     // Setup the bootstrap
+    initBodyParser() {
+        this.app.use(bodyparser.urlencoded({ extended: false }));
+        this.app.use(bodyparser.json());
+    }
+    // Setup the bootstrap
 
-     bootstrap() {
+    bootstrap() {
         this.initBodyParser();
         this.setupRoutes();
         return this;
     }
 
-     run() {
+    run() {
         const { port, env } = this.config;
         this.app.listen(port, () => {
             console.log(`App started successfully on ${port} in ${env} environment`);
