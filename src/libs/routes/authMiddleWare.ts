@@ -10,9 +10,7 @@ export default (module, permissionType) => async (req, res, next) => {
     const {secret} = config;
     let user;
     try {
-
-        user = jwt.verify(token, secret);
-
+         user = jwt.verify(token, secret);
     } catch (err) {
         next({error: 'Unauthorized', message: 'User not authorized', status: 403});
     }
