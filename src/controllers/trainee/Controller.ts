@@ -1,4 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
+// import { Request } from 'express-validator/src/base';
+import * as jwt from 'jsonwebtoken';
+import config from '../../config/configuration';
 const trainee = [
     {
         name: 'Himanshu',
@@ -38,6 +41,10 @@ class Trainee {
         const { name } = req.body;
         const newTrainee = trainee.filter((data) => data.name !== name);
         return res.status(201).send({ message: 'Users deleted successfully', data: newTrainee });
+    }
+    createToken(req: Request, res: Response, next: NextFunction) {
+        const token = jwt.sign(req.body, config.secret);
+        res.status(200).send({message: 'Token successfully create', data: {token}, status: 'success'});
     }
 
 }
