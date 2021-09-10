@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as bodyparser from 'body-parser';
 import { errorHandler, notFoundRoute } from './libs/routes';
 import routes from './router';
+import Database from './libs/Database';
 
 // Exporting the Server
 export default class Server {
@@ -22,7 +23,6 @@ export default class Server {
         this.app.use(errorHandler);
 
     }
-
     initBodyParser() {
         this.app.use(bodyparser.urlencoded({ extended: false }));
         this.app.use(bodyparser.json());
@@ -35,15 +35,16 @@ export default class Server {
         return this;
     }
 
-    run() {
-        const { port, env } = this.config;
-        this.app.listen(port, () => {
-            console.log(`App started successfully on ${port} in ${env} environment`);
-
-
-        });
+    public async run() {
+        const { port, env , mongoURL } = this.config;
+        try {
+            await Database.open(mongoURL);
+            this.app.listen(port, () => {
+                console.log(`App started successfully on ${port} in ${env} environment`);
+            });
+        } catch (error) {
+            console.log('inside try', error);
+        }
         return this;
     }
-
-
 }
