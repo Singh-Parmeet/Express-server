@@ -43,7 +43,7 @@ export default class Server {
                 console.log(`App started successfully on ${port} in ${env} environment`);
             });
         } catch (error) {
-            console.log('inside try', error);
+            console.log('Internal server error', error);
         }
         return this;
     }
