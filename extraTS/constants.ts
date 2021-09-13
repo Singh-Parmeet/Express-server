@@ -4,8 +4,8 @@ const permission: Permission = {
   all: ['head-trainer'],
   read : ['trainee', 'trainer'],
   write : ['trainer'],
-  delete: [],
-}
+  delete: ['head-trainer'],
+  },
 
 };
 

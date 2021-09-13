@@ -5,5 +5,5 @@ import { validateUsers } from './utils';
 
 createDiamondShape(5);
 createEquilateral(5);
-console.log(hasPermission(getUsers, 'trainer', 'write'));
+console.log(hasPermission(getUsers, 'trainer', 'read'));
 validateUsers(users);
