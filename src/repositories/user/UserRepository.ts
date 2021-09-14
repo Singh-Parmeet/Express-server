@@ -16,7 +16,7 @@ export default class UserRepository {
         return userModel.count();
     }
     public create(data: any): Promise<IUserModel> {
-        console.log('UserRepository:: update', data);
+        console.log('UserRepository:: added', data);
         const id = UserRepository.generationObjectId();
         const model = new userModel({
             _id: id,
@@ -28,5 +28,8 @@ export default class UserRepository {
         console.log('UserRepository:: update', data);
         return userModel.updateOne(data);
     }
-
+    public delete(data: any): mongoose.Query<object, IUserModel> {
+        console.log('UserRepository:: Delete', data);
+        return userModel.deleteOne(data);
+    }
 }

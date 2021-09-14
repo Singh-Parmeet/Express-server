@@ -7,7 +7,7 @@ export default () => {
           console.log('res', typeof res);
           if (res === 0) {
               console.log('Data seeding in progress');
-              userRepository.create({name: 'Head-Trainer', role: 'head-trainer',
+              userRepository.create({name: 'Hima', role: 'head-trainer',
               email: 'head.trainer@successive.tech', password: 'Training@123'});
               userRepository.create({name: 'Trainer', role: 'trainer',
               email: 'trainer@successive.tech', password: 'Training@123'});
