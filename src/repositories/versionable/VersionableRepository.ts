@@ -53,7 +53,7 @@ export default class VersionableRepository
         newData._id = VersionableRepository.generationObjectId();
         delete newData.deletedAt;
 
-        const model = new this.model((newData));
+        const model = new this.model(newData);
         return model.save();
     }
 }
