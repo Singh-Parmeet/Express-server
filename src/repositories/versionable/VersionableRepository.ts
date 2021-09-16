@@ -42,8 +42,6 @@ export default class VersionableRepository
     }
 
     public async update(data: any): Promise<D> {
-        console.log('Valid documnets');
-        console.log('Error', data);
 
         const prev = await this.findOne({originalId: data.originalId, deletedAt: undefined});
         if (prev) {
