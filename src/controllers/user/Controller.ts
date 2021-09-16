@@ -6,7 +6,6 @@ import UserRepository from '../../repositories/user/UserRepository';
 class User {
      userRepository = new UserRepository();
     // Read-All
-    userRepository = new UserRepository();
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
           const data = await this.userRepository.find({});
