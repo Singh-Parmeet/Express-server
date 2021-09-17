@@ -3,8 +3,8 @@ const permission: Permission = {
   getUsers: {
   all: ['head-trainer'],
   read : ['trainee', 'trainer', 'head-trainer'],
-  write : ['trainer', 'head-trainer', 'trainee'],
-  delete: ['head-trainer', 'trainee'],
+  write : ['trainer', 'head-trainer'],
+  delete: ['head-trainer'],
   },
 
 };
