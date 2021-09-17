@@ -4,7 +4,6 @@ const userRepository: UserRepository = new UserRepository();
 export default () => {
     userRepository.count()
       .then(res => {
-          console.log('res', typeof res);
           if (res === 0) {
               console.log('Data seeding in progress');
               userRepository.create({name: 'Hima', role: 'head-trainer',

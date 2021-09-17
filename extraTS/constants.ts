@@ -2,8 +2,8 @@ import { Permission, EmailType } from './interfaces';
 const permission: Permission = {
   getUsers: {
   all: ['head-trainer'],
-  read : ['trainee', 'trainer'],
-  write : ['trainer'],
+  read : ['trainee', 'trainer', 'head-trainer'],
+  write : ['trainer', 'head-trainer'],
   delete: ['head-trainer'],
   },
 
