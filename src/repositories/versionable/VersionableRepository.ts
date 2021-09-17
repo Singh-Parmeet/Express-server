@@ -37,15 +37,15 @@ export default class VersionableRepository
         return await model.save();
     }
 
-    protected softDelete( data: any) {
-        return this.model.updateOne({ originalId: data.originalId, deletedAt: undefined }, {deletedAt: Date.now()});
+    protected softDelete( id: any) {
+        return this.model.updateOne({ originalId: id, deletedAt: undefined }, {deletedAt: Date.now()});
     }
 
     public async update(data: any): Promise<D> {
 
         const prev = await this.findOne({originalId: data.originalId, deletedAt: undefined});
         if (prev) {
-            await this.softDelete(data);
+            await this.softDelete(data.originalId);
         } else {
             return undefined;
         }
