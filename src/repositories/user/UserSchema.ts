@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+// import { Hash } from 'crypto';
 import VersionableSchema from '../versionable/VersionableSchema';
 
 class UserSchema extends VersionableSchema {

@@ -22,15 +22,15 @@ export default class UserRepository extends VersionableRepository
         return super.count();
     }
 
-    public create(data: any): Promise<IUserModel> {
-        return super.create(data);
+    public async create(data: any): Promise<IUserModel> {
+        return await super.create(data);
     }
 
-    public updated(data: any): mongoose.UpdateQuery<IUserModel> {
-        return super.update(data);
+    public async updated(data: any): Promise<IUserModel> {
+        return await super.update(data);
     }
 
-    public delete(data: any): mongoose.Query<object, IUserModel> {
-        return super.softDelete(data);
+    public async delete(data: any): Promise<IUserModel> {
+        return await super.softDelete(data);
     }
 }

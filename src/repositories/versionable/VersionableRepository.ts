@@ -24,7 +24,7 @@ export default class VersionableRepository
 
     public count(): mongoose.Query<number, D> {
         const finalQuery = { deletedAt: undefined};
-        return this.model.count();
+        return this.model.count(finalQuery);
     }
 
     public async create(options: any): Promise<D> {
@@ -35,6 +35,7 @@ export default class VersionableRepository
             ...options,
         });
         return await model.save();
+
     }
 
     softDelete( data: any) {
