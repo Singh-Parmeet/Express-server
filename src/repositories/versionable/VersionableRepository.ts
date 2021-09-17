@@ -12,17 +12,17 @@ export default class VersionableRepository
         this.model = model;
     }
 
-    protected findOne(query: any): mongoose.Query<D, D> {
+    protected async findOne(query: any): Promise<D> {
         const finalQuery = { deletedAt: undefined, ...query};
-        return this.model.findOne(finalQuery).lean();
+        return await this.model.findOne(finalQuery).lean();
     }
 
-    protected find(query: any = {}, projection: any = {}, options: any = {}): mongoose.Query<D[], D> {
+    protected async find(query: any = {}, projection: any = {}, options: any = {}): Promise<D[]> {
         const finalQuery = { deletedAt: undefined, ...query};
-       return this.model.find(query, projection, options);
+       return await this.model.find(query, projection, options);
     }
 
-    public count(): mongoose.Query<number, D> {
+    public async count(): Promise<number> {
         const finalQuery = { deletedAt: undefined};
         return this.model.count(finalQuery);
     }
@@ -38,8 +38,8 @@ export default class VersionableRepository
 
     }
 
-    softDelete( data: any) {
-        return this.model.updateOne({ originalId: data.originalId, deletedAt: undefined }, {deletedAt: Date.now()});
+    protected async softDelete( data: any) {
+        return await this.model.updateOne({ originalId: data.originalId, deletedAt: undefined }, {deletedAt: Date.now()});
     }
 
     public async update(data: any): Promise<D> {

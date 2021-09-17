@@ -11,12 +11,12 @@ export default () => {
                 name: 'Hima',
                 role: 'head-trainer',
                 email: 'head.trainer@successive.tech',
-                password: config});
+                password: config.password});
               userRepository.create({
                 name: 'Trainer',
                 role: 'trainer',
                 email: 'trainer@successive.tech',
-                password: config});
+                password: config.password });
             }
     }).catch(err => console.log(err));
 
