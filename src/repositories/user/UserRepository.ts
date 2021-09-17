@@ -31,6 +31,6 @@ export default class UserRepository extends VersionableRepository
     }
 
     public delete(data: any): mongoose.Query<object, IUserModel> {
-        return super.softDelete(data);
+        return super.softDelete(data.originalId);
     }
 }
