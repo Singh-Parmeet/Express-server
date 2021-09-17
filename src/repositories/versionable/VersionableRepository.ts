@@ -46,7 +46,7 @@ export default class VersionableRepository
 
         const prev = await this.findOne({originalId: data.originalId, deletedAt: undefined});
         if (prev) {
-            await this.softDelete(data);
+            await this.softDelete(data.originalId);
         } else {
             return undefined;
         }

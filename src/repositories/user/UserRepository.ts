@@ -30,7 +30,12 @@ export default class UserRepository extends VersionableRepository
         return await super.update(data);
     }
 
+<<<<<<< HEAD
     public async delete(data: any): Promise<IUserModel> {
         return await super.softDelete(data);
+=======
+    public delete(data: any): mongoose.Query<object, IUserModel> {
+        return super.softDelete(data.originalId);
+>>>>>>> 3ace3a7147704ae4b1a715efc39ea8886592e340
     }
 }
