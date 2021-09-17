@@ -19,12 +19,12 @@ export default class VersionableRepository
 
     protected find(query: any = {}, projection: any = {}, options: any = {}): mongoose.Query<D[], D> {
         const finalQuery = { deletedAt: undefined, ...query};
-       return this.model.find(query, projection, options);
+       return this.model.find(finalQuery, projection, options);
     }
 
     public count(): mongoose.Query<number, D> {
         const finalQuery = { deletedAt: undefined};
-        return this.model.count();
+        return this.model.count(finalQuery);
     }
 
     public async create(options: any): Promise<D> {
@@ -37,7 +37,7 @@ export default class VersionableRepository
         return await model.save();
     }
 
-    softDelete( data: any) {
+    protected softDelete( data: any) {
         return this.model.updateOne({ originalId: data.originalId, deletedAt: undefined }, {deletedAt: Date.now()});
     }
 
