@@ -18,6 +18,6 @@ export default () => {
                 email: 'trainer@successive.tech',
                 password: config.password });
             }
-    }).catch(err => console.log(err));
+    }).catch(err => { return (err); });
 
 };

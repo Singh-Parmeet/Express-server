@@ -13,10 +13,9 @@ class User {
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
           const data = await this.userRepository.find({});
-          console.log('data', typeof data);
           res.status(200).json({ data, count: data.length });
-        } catch (err) {
-          console.log(err);
+        } catch (error) {
+            res.status(403).send({message: 'User not found', status: 'Failure'});
         }
     }
     // Create data
@@ -29,8 +28,8 @@ class User {
                     res.status(200).json({ data, count: this.userRepository.count});
                 });
             });
-                }   catch (err) {
-                    console.log(err);
+                }   catch (error) {
+                    res.status(403).send({message: 'User not created', status: 'Failure'});
                 }
     }
     // Update data
@@ -38,8 +37,8 @@ class User {
         try {
             const data = await this.userRepository.updated(req.body);
             res.status(200).json({ data, count: this.userRepository.count});
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            res.status(403).send({message: 'User not updated', status: 'Failure'});
         }
     }
     // Delete data
@@ -47,20 +46,17 @@ class User {
         try {
             const data = await this.userRepository.delete(req.body);
             res.status(200).json({ data, count: this.userRepository.count });
-        } catch (err) {
-            console.log(err);
+        } catch (error) {
+            res.status(403).send({message: 'User not deleted', status: 'Failure'});
         }
 
     }
     // Comparing the passwords
     Hashmatch = async ( data: any) => {
         const userFound = await this.userRepository.findOne({email: data.email});
-        const received: any = {...userFound};
-        const match = await bcrypt.compare(data.password, received.password);
+        const match = await bcrypt.compare(data.password, userFound.password);
         if (match) {
             return userFound;
-        } else {
-            console.log('match not found');
         }
     }
     // Once password match token can be used
@@ -71,12 +67,9 @@ class User {
                 const signal = {_id: userFound._id, email: userFound.email};
                 const token = await jwt.sign(signal, config.secret, { expiresIn: '15m' });
                 res.status(200).send({message: 'Token successfully create', data: {token}, status: 'success'});
-            } else {
-                  res.status(403).send({message: 'Password not found', status: 'Failure'});
             }
-        } catch (err) {
+        } catch (error) {
             res.status(403).send({message: 'Password not found', status: 'Failure'});
-            console.log(err);
         }
     }
 }
