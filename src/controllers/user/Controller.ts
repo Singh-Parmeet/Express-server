@@ -17,8 +17,8 @@ class User {
             const data = await this.userRepository.find({skipValue, limitValue});
             console.log('data', typeof data);
             res.status(200).json({ data, count: data.length });
-        } catch (err) {
-          console.log(err);
+        } catch (error) {
+          res.status(403).send({message: 'User not found', status: 'Failure'});
         }
     }
     // Create data

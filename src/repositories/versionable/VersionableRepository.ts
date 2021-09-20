@@ -19,7 +19,7 @@ export default class VersionableRepository
 
     protected async find(query: any = {}, projection: any = {}, options: any = {}): Promise<D[]> {
         const finalQuery = { deletedAt: undefined, ...query};
-       return await this.model.find(query, projection, options).sort({ createdAt: 'desc'}).limit(parseInt(query.limitValue, radix)).skip(parseInt(query.skipValue, radix));
+       return await this.model.find(finalQuery, projection, options).sort({ createdAt: 'desc'}).limit(parseInt(query.limitValue, radix)).skip(parseInt(query.skipValue, radix));
     }
 
     public async count(): Promise<number> {
