@@ -12,9 +12,11 @@ class User {
     // Read-All
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
-          const data = await this.userRepository.find({});
-          console.log('data', typeof data);
-          res.status(200).json({ data, count: data.length });
+            const skipValue = req.query.skip;
+            const limitValue = req.query.limit;
+            const data = await this.userRepository.find({skipValue, limitValue});
+            console.log('data', typeof data);
+            res.status(200).json({ data, count: data.length });
         } catch (err) {
           console.log(err);
         }

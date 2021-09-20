@@ -1,3 +1,5 @@
+import { param } from 'express-validator';
+
 export default Object.freeze({
     create: {
         name: {
@@ -25,17 +27,17 @@ export default Object.freeze({
     },
     get: {
         skip: {
-            exists: false,
-            default: 0,
+            exists: true,
+            default1: 0,
             number: true,
-            in: ['query'],
+            in: [param],
             errorMessage: 'Skip is invalid',
         },
         limit: {
-            exist: false,
-            default: 10,
+            exist: true,
+            default2: 10,
             number: true,
-            in: ['query'],
+            in: [param],
             errorMessage: 'Limit is invalid',
         },
     },
