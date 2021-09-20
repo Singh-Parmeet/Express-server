@@ -13,12 +13,34 @@ export default Object.freeze({
 
             },
         },
+        role: {
+            exists: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'Role is required',
+            isLength: {
+                errorMessage: 'Character should be 1',
+                options: { min: 1 },
+
+            },
+        },
+        email: {
+            exists: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'Email is required',
+            isLength: {
+                errorMessage: 'Character should be 1',
+                options: { min: 1 },
+
+            },
+        },
     },
     delete: {
-        name: {
+        originalId: {
             exists: true,
             in: ['body'],
-            errorMessage: 'Name is required',
+            errorMessage: 'Id is required',
             isLength: {
                 errorMessage: 'Character should be 1',
                 options: { min: 1 },
@@ -42,10 +64,11 @@ export default Object.freeze({
         },
     },
     update: {
-        name: {
+        originalId: {
+            string: true,
             exists: true,
             in: ['body'],
-            errorMessage: 'Name is required',
+            errorMessage: 'Id is required',
         }
     }
 
