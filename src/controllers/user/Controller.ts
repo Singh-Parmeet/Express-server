@@ -15,10 +15,9 @@ class User {
             const skipValue = req.query.skip;
             const limitValue = req.query.limit;
             const data = await this.userRepository.find({skipValue, limitValue});
-            console.log('data', typeof data);
             res.status(200).json({ data, count: data.length });
         } catch (error) {
-          res.status(403).send({message: 'User not found', status: 'Failure'});
+            res.status(403).send({message: 'User not found', status: 'Failure'});
         }
     }
     // Create data
