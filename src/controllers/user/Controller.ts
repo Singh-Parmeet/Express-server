@@ -55,18 +55,20 @@ class User {
     }
     // Comparing the passwords
     Hashmatch = async ( data: any) => {
-        const userFound = await this.userRepository.findOne({email: data.email});
-        const match = await bcrypt.compare(data.password, userFound.password);
+        const validatePassword = await this.userRepository.findOne({email: data.email});
+        const match = await bcrypt.compare(data.password, validatePassword.password);
         if (match) {
-            return userFound;
+            return validatePassword;
+        } else {
+            throw new Error ('Password do not match with database');
         }
     }
     // Once password match token can be used
     createToken = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const userFound = await this.Hashmatch(req.body);
-            if (userFound) {
-                const signal = {_id: userFound._id, email: userFound.email};
+            const validatePassword = await this.Hashmatch(req.body);
+            if (validatePassword) {
+                const signal = {_id: validatePassword._id, email: validatePassword.email};
                 const token = await jwt.sign(signal, config.secret, { expiresIn: '15m' });
                 res.status(200).send({message: 'Token successfully create', data: {token}, status: 'success'});
             }
