@@ -67,6 +67,39 @@ export default Object.freeze({
             exists: true,
             in: ['body'],
             errorMessage: 'Id is required',
+        },
+        name: {
+            exists: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'Name is required',
+            isLength: {
+                errorMessage: 'Character should be 1',
+                options: { min: 1 },
+
+            },
+        },
+        role: {
+            exists: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'Role is required',
+            isLength: {
+                errorMessage: 'Character should be 1',
+                options: { min: 1 },
+
+            },
+        },
+        email: {
+            exists: true,
+            string: true,
+            in: ['body'],
+            errorMessage: 'Email is required',
+            isLength: {
+                errorMessage: 'Character should be 1',
+                options: { min: 1 },
+
+            },
         }
     }
 
