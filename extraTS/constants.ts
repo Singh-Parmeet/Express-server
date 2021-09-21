@@ -17,3 +17,4 @@ const users: EmailType[] = [{
 }];
 
 export { getUsers, users };
+export const BCRYPT_SALT_ROUNDS: number = 6;

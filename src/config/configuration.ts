@@ -8,6 +8,8 @@ const configuration: IConfig = Object.freeze({
     port: process.env.PORT,
     secret: process.env.TOKEN_SECRET,
     mongoURL: process.env.MONGO_URL,
+    password: process.env.PASSWORD,
+
 });
 
 export default configuration;
