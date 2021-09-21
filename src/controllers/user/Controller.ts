@@ -60,7 +60,7 @@ class User {
         if (match) {
             return validatePassword;
         } else {
-            throw new Error ('Password do not match with database');
+            throw new Error ('Password not match');
         }
     }
     // Once password match token can be used

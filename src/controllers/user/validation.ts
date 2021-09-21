@@ -99,7 +99,7 @@ export default Object.freeze({
             errorMessage: 'Email is required',
             isLength: {
                 errorMessage: 'Character should be 1',
-                options: { min: 1 },
+                options: { min: 2 },
 
             },
         }
