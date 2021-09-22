@@ -4,6 +4,7 @@ import * as jwt from 'jsonwebtoken';
 import config from '../../config/configuration';
 import UserRepository from '../../repositories/user/UserRepository';
 import * as constant from '../../../extraTS/constants';
+import radix from 'radix';
 class User {
     private userRepository: UserRepository;
     public constructor() {
@@ -12,10 +13,11 @@ class User {
     // Read-All
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const skipValue = req.query.skip;
-            const limitValue = req.query.limit;
-            const data = await this.userRepository.find({skipValue, limitValue});
-            res.status(200).json({ data, count: data.length });
+            const skipValue = parseInt((req.query.skip), radix) || 0;
+            const limitValue = parseInt((req.query.limit), radix) || 10;
+            const { search } = req.query;
+            const data = await this.userRepository.find({skipValue, limitValue, search});
+            res.status(200).json({ data, count: data.length, status: 'Success' });
         } catch (error) {
             res.status(403).send({message: 'User not found', status: 'Failure'});
         }

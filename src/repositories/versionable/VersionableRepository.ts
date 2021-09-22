@@ -1,5 +1,4 @@
 import * as mongoose from 'mongoose';
-import radix from 'radix';
 export default class VersionableRepository
  <D extends mongoose.Document, M extends mongoose.Model<D>> {
 
@@ -18,12 +17,18 @@ export default class VersionableRepository
     }
 
     protected async find(query: any = {}, projection: any = {}, options: any = {}): Promise<D[]> {
-        const finalQuery = { deletedAt: undefined, ...query};
-       return await this.model.find(finalQuery, projection, options).sort({ createdAt: 'desc'}).limit(parseInt(query.limitValue, radix)).skip(parseInt(query.skipValue, radix));
+        const { skip, limit, sortby = '-createdAt', search = ''} = query;
+        const finalQuery: any = { deletedAt: undefined,
+            $or: [
+                {name : {$regex : search, $options: 'i' } },
+                {email : {$regex : search, $options: 'i' } },
+            ],
+        };
+       return await this.model.find(finalQuery, projection, options).sort({ sortby: 'desc'}).limit(query.limitValue).skip(query.skipValue);
     }
 
     public async count(): Promise<number> {
-        const finalQuery = { deletedAt: undefined};
+        const finalQuery: any = { deletedAt: undefined};
         return this.model.count(finalQuery);
     }
 
