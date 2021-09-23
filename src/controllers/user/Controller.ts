@@ -12,8 +12,10 @@ class User {
     // Read-All
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
-          const data = await this.userRepository.find({});
-          res.status(200).json({ data, count: data.length });
+            const skipValue = req.query.skip;
+            const limitValue = req.query.limit;
+            const data = await this.userRepository.find({skipValue, limitValue});
+            res.status(200).json({ data, count: data.length });
         } catch (error) {
             res.status(403).send({message: 'User not found', status: 'Failure'});
         }
@@ -58,7 +60,7 @@ class User {
         if (match) {
             return validatePassword;
         } else {
-            throw new Error ('Password do not match with database');
+            throw new Error ('Password not match');
         }
     }
     // Once password match token can be used
