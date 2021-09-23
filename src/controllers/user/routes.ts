@@ -224,7 +224,7 @@ router
 /**
  * @swagger
  * /user/review:
- *  review:
+ *  post:
  *      tags: [Users]
  *      requestBody:
  *          description: Enter originalId and feedback for the trainee.
@@ -242,7 +242,7 @@ router
  *                              example: 6144d6e125db5004ae7cce47
  *                          feedback:
  *                              type: string
- *                              example: codequality, communication, redmine
+ *                              example: {code quality: 10, redmine: 8, communication: 7}
  *      responses:
  *          200:
  *              description: Feedback added successfully!
