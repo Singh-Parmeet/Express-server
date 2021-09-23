@@ -224,7 +224,7 @@ router
 /**
  * @swagger
  * /user/review:
- *  post:
+ *  put:
  *      tags: [Users]
  *      requestBody:
  *          description: Enter originalId and feedback for the trainee.
