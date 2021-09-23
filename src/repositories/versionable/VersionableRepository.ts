@@ -1,5 +1,5 @@
 import * as mongoose from 'mongoose';
-import radix from 'radix';
+
 export default class VersionableRepository
  <D extends mongoose.Document, M extends mongoose.Model<D>> {
 
@@ -19,7 +19,7 @@ export default class VersionableRepository
 
     protected async find(query: any = {}, projection: any = {}, options: any = {}): Promise<D[]> {
         const finalQuery = { deletedAt: undefined, ...query};
-       return await this.model.find(finalQuery, projection, options).sort({ createdAt: 'desc'}).limit(parseInt(query.limitValue, radix)).skip(parseInt(query.skipValue, radix));
+       return await this.model.find(finalQuery, projection, options);
     }
 
     public async count(): Promise<number> {
