@@ -221,4 +221,35 @@ router
  *              description: User does not exists!
  */
 
+/**
+ * @swagger
+ * /user/review:
+ *  review:
+ *      tags: [Users]
+ *      requestBody:
+ *          description: Enter originalId and feedback for the trainee.
+ *          required: true
+ *          content:
+ *              application/json:
+ *                  schema:
+ *                      type: object
+ *                      required:
+ *                          - originalId
+ *                          - feedback
+ *                      properties:
+ *                          originalId:
+ *                              type: string
+ *                              example: 6144d6e125db5004ae7cce47
+ *                          feedback:
+ *                              type: string
+ *                              example: codequality, communication, redmine
+ *      responses:
+ *          200:
+ *              description: Feedback added successfully!
+ *          403:
+ *              description: Feedback not added!
+ *
+ */
+router.put('/review', authMiddleWare(getUsers, 'review'), validationHandler(validation.feedback), userController.review);
+
 export default router;

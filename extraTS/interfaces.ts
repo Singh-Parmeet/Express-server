@@ -10,6 +10,7 @@ interface GetUsers {
     read: string[];
     write: string[];
     delete: string[];
+    review: string[];
 }
 
 interface Permission {

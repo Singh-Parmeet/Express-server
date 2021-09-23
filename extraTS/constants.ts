@@ -5,6 +5,7 @@ const permission: Permission = {
   read : ['trainee', 'trainer', 'head-trainer'],
   write : ['trainer', 'head-trainer'],
   delete: ['head-trainer'],
+  review: ['reviewer']
   },
 
 };

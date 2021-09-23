@@ -33,4 +33,8 @@ export default class UserRepository extends VersionableRepository
     public async delete(data: any): Promise<IUserModel> {
         return await super.softDelete(data);
     }
+    public async review(data: any): Promise<IUserModel> {
+        return await super.review(data);
+    }
+
 }

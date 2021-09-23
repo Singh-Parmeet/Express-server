@@ -62,4 +62,12 @@ export default class VersionableRepository
         const model = new this.model(newData);
         return model.save();
     }
+    // Feature Feedback
+    public async review(data: any): Promise<D> {
+        const{originalId, feedback} = data;
+        return this.model.updateOne({originalId, deleteAt: undefined}, {feedback}).lean();
+    }
+
+
+
 }
