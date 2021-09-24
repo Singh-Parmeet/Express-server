@@ -80,13 +80,17 @@ class User {
     }
     review = async (req: Request, res: Response , next: NextFunction) => {
         try {
+            const permission = await this.userRepository.findOne({originalId: req.body.originalId});
+            if (permission.role === 'trainee') {
             const data = await this.userRepository.review(req.body);
-            console.log('DATA FROM CONTROLLER', data);
             return  res.status(200).json({ data, message: 'review added successfully', count: this.userRepository.count});
-        } catch (err) {
-            return res.status(403).json({message: 'Updation failed', status: 'failure'});
+        } else {
+            throw new Error ('User is not trainee');
         }
+    } catch (err) {
+            return res.status(403).json({message: 'Failed user is not trainee', status: 'failure'});
+        }
+
     }
 }
-
 export default new User();

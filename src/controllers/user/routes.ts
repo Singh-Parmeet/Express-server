@@ -224,10 +224,10 @@ router
 /**
  * @swagger
  * /user/review:
- *  put:
+ *   put:
  *      tags: [Users]
  *      requestBody:
- *          description: Enter originalId and feedback for the trainee.
+ *          description: Enter OriginalId of the trainee and feedback.
  *          required: true
  *          content:
  *              application/json:
@@ -242,13 +242,14 @@ router
  *                              example: 6144d6e125db5004ae7cce47
  *                          feedback:
  *                              type: string
- *                              example: {code quality: 10, redmine: 8, communication: 7}
+ *                              example: { codequality = "10", communication = "7", redmine = "8" }
+ *      security:
+ *                   - bearerAuth: []
  *      responses:
  *          200:
- *              description: Feedback added successfully!
+ *              description: Feedback Updated successfully!
  *          403:
- *              description: Feedback not added!
- *
+ *              description: Unable to read the originalId
  */
 router.put('/review', authMiddleWare(getUsers, 'review'), validationHandler(validation.feedback), userController.review);
 
