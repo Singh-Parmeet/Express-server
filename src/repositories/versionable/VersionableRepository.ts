@@ -24,7 +24,7 @@ export default class VersionableRepository
                 {email : {$regex : search, $options: 'i' } },
             ],
         };
-       return await this.model.find(finalQuery, projection, options).sort({ name: '1', email: '1'}).limit(limit).skip(skip);
+       return await this.model.find(finalQuery, projection, { sort : { name: '-1', email: '-1'}, skip, limit});
     }
 
     public async count(): Promise<number> {
