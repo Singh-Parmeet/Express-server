@@ -4,7 +4,6 @@ import * as jwt from 'jsonwebtoken';
 import config from '../../config/configuration';
 import UserRepository from '../../repositories/user/UserRepository';
 import * as constant from '../../../extraTS/constants';
-import radix from 'radix';
 class User {
     private userRepository: UserRepository;
     public constructor() {
