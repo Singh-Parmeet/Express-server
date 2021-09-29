@@ -3,6 +3,7 @@ import * as bodyparser from 'body-parser';
 import { errorHandler, notFoundRoute } from './libs/routes';
 import routes from './router';
 import Database from './libs/Database';
+import Swagger from './libs/Swagger';
 
 // Exporting the Server
 export default class Server {
@@ -31,6 +32,7 @@ export default class Server {
 
     bootstrap() {
         this.initBodyParser();
+        this.initSwagger();
         this.setupRoutes();
         return this;
     }
@@ -46,5 +48,17 @@ export default class Server {
             console.log('Internal server error', error);
         }
         return this;
+    }
+    // initialze swagger
+    private initSwagger() {
+        const { swaggerDefinition, swaggerUrl} = this.config;
+        const swaggerSetup = new Swagger();
+        // JSON Route
+        this.app.use(`${swaggerUrl}.json`, swaggerSetup.getRouter({
+            swaggerDefinition,
+        }));
+        // UI Route
+        const { serve, setup } = swaggerSetup.getUI(swaggerUrl);
+        this.app.use(swaggerUrl, serve, setup);
     }
 }

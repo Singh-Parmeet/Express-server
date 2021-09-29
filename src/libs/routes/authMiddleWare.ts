@@ -6,9 +6,12 @@ import UserRepository from '../../repositories/user/UserRepository';
 const userRepository: any = new UserRepository();
 export default (module, permissionType) => async (req, res, next) => {
 
-    const token = req.header('Authorization');
+    let token = req.header('Authorization');
     if (!token) {
         next({error: 'unauthorized', message: 'Token not found', status: 403});
+    }
+    if (token.startsWith ('Bearer ')) {
+        token = token.substring(7, token.length);
     }
 
     const {secret} = config;

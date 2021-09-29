@@ -50,14 +50,12 @@ export default Object.freeze({
     get: {
         skip: {
             exists: true,
-            default1: 0,
             number: true,
             in: [param],
             errorMessage: 'Skip is invalid',
         },
         limit: {
             exist: true,
-            default2: 10,
             number: true,
             in: [param],
             errorMessage: 'Limit is invalid',

@@ -12,10 +12,12 @@ class User {
     // Read-All
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const skipValue = req.query.skip;
-            const limitValue = req.query.limit;
-            const data = await this.userRepository.find({skipValue, limitValue});
-            res.status(200).json({ data, count: data.length });
+            const skip  = Number(req.query.skip) || 0;
+            const limit = Number(req.query.limit) || 10;
+            const { search = '' } = req.query;
+
+            const data = await this.userRepository.find({search, limit, skip});
+            res.status(200).json({ data, count: data.length, status: 'Success' });
         } catch (error) {
             res.status(403).send({message: 'User not found', status: 'Failure'});
         }
