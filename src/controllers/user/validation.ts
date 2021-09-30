@@ -118,7 +118,6 @@ export default Object.freeze({
             errorMessage: 'Feedback is required',
             custom: {
                 options: (value) => {
-                    console.log('value', typeof value);
                     if (value === null || typeof value  !== 'object' || Object.keys(value).length === 0 ) {
                         return false;
                     } else {
