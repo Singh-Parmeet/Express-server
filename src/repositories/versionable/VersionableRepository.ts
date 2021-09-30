@@ -17,14 +17,14 @@ export default class VersionableRepository
     }
 
     protected async find(query: any = {}, projection: any = {}, options: any = {}): Promise<D[]> {
-        const { skip, limit, sortby = '-createdAt', search = ''} = query;
+        const { search = '', limit, skip } = query;
         const finalQuery: any = { deletedAt: undefined,
             $or: [
                 {name : {$regex : search, $options: 'i' } },
                 {email : {$regex : search, $options: 'i' } },
             ],
         };
-       return await this.model.find(finalQuery, projection, options).sort({ sortby: 'desc'}).limit(query.limitValue).skip(query.skipValue);
+       return await this.model.find(finalQuery, projection, { sort : { name: '-1', email: '-1'}, skip, limit});
     }
 
     public async count(): Promise<number> {
@@ -44,12 +44,12 @@ export default class VersionableRepository
     }
 
     protected async softDelete( data: any) {
-        return await this.model.updateOne({ originalId: data.originalId, deletedAt: undefined }, {deletedAt: Date.now()});
+        return await this.model.updateOne({ originalId: data, deletedAt: undefined }, {deletedAt: Date.now()});
     }
 
     public async update(data: any): Promise<D> {
 
-        const prev = await this.findOne({originalId: data.originalId, deletedAt: undefined});
+        const prev = await this.findOne({originalId: data.originalId});
         if (prev) {
             await this.softDelete(data.originalId);
         } else {
@@ -57,7 +57,6 @@ export default class VersionableRepository
         }
         const newData = Object.assign(JSON.parse(JSON.stringify(prev)), data);
         newData._id = VersionableRepository.generationObjectId();
-        delete newData.deletedAt;
 
         const model = new this.model(newData);
         return model.save();
