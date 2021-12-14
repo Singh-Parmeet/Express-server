@@ -10,6 +10,24 @@ class User {
         this.userRepository = new UserRepository();
     }
     // Read-All
+    getMe = async(req: Request, res: Response, next: NextFunction) => {
+        try {
+          let token = req.header('Authorization');
+          if (token.startsWith ('Bearer ')) {
+            token = token.substring(7, token.length);
+        }
+          const { secret } = config;
+          let user: any = {} ;
+          user = jwt.verify(token, secret);
+          console.log(user);
+          const userdata = await this.userRepository.findOne({ _id: user._id });
+          console.log(userdata);
+          res.status(200).send({userdata, message: 'User Fetched', status: 'success'});
+        } catch (err) {
+          res.status(403).send({message: 'User Fetch failed', status: 'error'});
+        }
+      }
+
     getAll = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const skip  = Number(req.query.skip) || 0;
@@ -17,9 +35,10 @@ class User {
             const { search = '' } = req.query;
 
             const data = await this.userRepository.find({search, limit, skip});
-            res.status(200).json({ data, count: data.length, status: 'Success' });
+            const total = await this.userRepository.count();
+            res.status(200).json({ data , total, status: 'success' });
         } catch (error) {
-            res.status(403).send({message: 'User not found', status: 'Failure'});
+            res.status(403).send({message: 'User not found', status: 'error'});
         }
     }
     // Create data
@@ -29,29 +48,29 @@ class User {
              bcrypt.genSalt(constant.BCRYPT_SALT_ROUNDS, (_err, salt) => {
                 bcrypt.hash(config.password, salt, async (err: any, hash) => {
                     const data = await this.userRepository.create({name, role, password: hash, email});
-                    res.status(200).json({ data, count: this.userRepository.count});
+                    res.status(200).json({ data, message: 'User added successfully',  count: this.userRepository.count, status: 'success'});
                 });
             });
                 }   catch (error) {
-                    res.status(403).send({message: 'User not created', status: 'Failure'});
+                    res.status(403).send({message: 'User not created', status: 'error'});
                 }
     }
     // Update data
     update = async (req: Request, res: Response, next: NextFunction) => {
         try {
             const data = await this.userRepository.updated(req.body);
-            res.status(200).json({ data, count: this.userRepository.count});
+            res.status(200).json({ data, message: 'User updated successfully', count: this.userRepository.count, status: 'success'});
         } catch (error) {
-            res.status(403).send({message: 'User not updated', status: 'Failure'});
+            res.status(403).send({message: 'User not updated', status: 'error'});
         }
     }
     // Delete data
     delete = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const data = await this.userRepository.delete(req.body);
-            res.status(200).json({ data, count: this.userRepository.count });
+            const data = await this.userRepository.delete(req.body.originalId);
+            res.status(200).json({ data, message: 'User deleted successfully', count: this.userRepository.count, status: 'success' });
         } catch (error) {
-            res.status(403).send({message: 'User not deleted', status: 'Failure'});
+            res.status(403).send({message: 'User not deleted', status: 'error'});
         }
 
     }
@@ -75,7 +94,7 @@ class User {
                 res.status(200).send({message: 'Token successfully create', data: {token}, status: 'success'});
             }
         } catch (error) {
-            res.status(403).send({message: 'Password not found', status: 'Failure'});
+            res.status(403).send({message: 'Invalid Login Credentials', status: 'error'});
         }
     }
     review = async (req: Request, res: Response , next: NextFunction) => {
@@ -88,7 +107,7 @@ class User {
             throw new Error ('User is not trainee');
         }
     } catch (err) {
-            return res.status(403).json({message: 'Failed user is not trainee', status: 'failure'});
+            return res.status(403).json({message: 'Failed user is not trainee', status: 'error'});
         }
 
     }
