@@ -24,9 +24,6 @@ describe('For user endpoints', () => {
       },
     });
     mongoUri = mongoServer.getUri();
-    console.log('Uri', mongoUri);
-
-
     await Database.open(mongoUri);
 
     const res = await req.post(`/api/user/createToken`).send({
@@ -34,9 +31,6 @@ describe('For user endpoints', () => {
       password: userPassword,
     });
     token = res.body.data.token;
-    console.log('token', token);
-    console.log('res.body', res.body);
-
   });
 
   describe('Positive Test cases', () => {

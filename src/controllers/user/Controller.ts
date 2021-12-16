@@ -19,9 +19,7 @@ class User {
           const { secret } = config;
           let user: any = {} ;
           user = jwt.verify(token, secret);
-          console.log(user);
           const userdata = await this.userRepository.findOne({ _id: user._id });
-          console.log(userdata);
           res.status(200).send({userdata, message: 'User Fetched', status: 'success'});
         } catch (err) {
           res.status(403).send({message: 'User Fetch failed', status: 'error'});
@@ -58,9 +56,7 @@ class User {
     // Update data
     update = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log(req.body, 'req.body');
             const data = await this.userRepository.updated(req.body);
-            console.log(data, 'data');
             res.status(200).json({ data, message: 'User updated successfully', count: this.userRepository.count, status: 'success'});
         } catch (error) {
             res.status(403).send({message: 'User not updated', status: 'error'});
@@ -78,7 +74,6 @@ class User {
     }
     // Comparing the passwords
     Hashmatch = async ( data: any) => {
-        console.log(data, 'data');
         const validatePassword = await this.userRepository.findOne({email: data.email});
         const match = await bcrypt.compare(data.password, validatePassword.password);
         if (match) {
@@ -90,7 +85,6 @@ class User {
     // Once password match token can be used
     createToken = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            console.log(req.body);
             const validatePassword = await this.Hashmatch(req.body);
             if (validatePassword) {
                 const signal = {_id: validatePassword._id, email: validatePassword.email};
