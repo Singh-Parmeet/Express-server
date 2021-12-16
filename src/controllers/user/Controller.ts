@@ -78,5 +78,19 @@ class User {
             res.status(403).send({message: 'Password not found', status: 'Failure'});
         }
     }
+    review = async (req: Request, res: Response , next: NextFunction) => {
+        try {
+            const permission = await this.userRepository.findOne({originalId: req.body.originalId});
+            if (permission.role === 'trainee') {
+            const data = await this.userRepository.review(req.body);
+            return  res.status(200).json({ data, message: 'review added successfully', count: this.userRepository.count});
+        } else {
+            throw new Error ('User is not trainee');
+        }
+    } catch (err) {
+            return res.status(403).json({message: 'Failed user is not trainee', status: 'failure'});
+        }
+
+    }
 }
 export default new User();

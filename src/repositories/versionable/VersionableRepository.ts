@@ -24,7 +24,7 @@ export default class VersionableRepository
                 {email : {$regex : search, $options: 'i' } },
             ],
         };
-       return await this.model.find(finalQuery, projection, { sort : { name: '-1', email: '-1'}, skip, limit});
+       return await this.model.find(finalQuery, projection, { sort : { createdAt: 'desc'}, skip, limit});
     }
 
     public async count(): Promise<number> {
@@ -61,4 +61,12 @@ export default class VersionableRepository
         const model = new this.model(newData);
         return model.save();
     }
+    // Feature Feedback
+    public async review(data: any): Promise<D> {
+        const{originalId, feedback} = data;
+        return this.model.updateOne({originalId, deleteAt: undefined}, {feedback}).lean();
+    }
+
+
+
 }

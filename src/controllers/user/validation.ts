@@ -101,6 +101,31 @@ export default Object.freeze({
 
             },
         }
-    }
+    },
+    feedback: {
+        originalId: {
+            exists: true,
+            in: ['body'],
+            errorMessage: 'Id is required',
+            isLength: {
+                errorMessage: 'Character should be 1',
+                options: { min: 1 },
+            }
+        },
+        feedback: {
+            exists: true,
+            in: ['body'],
+            errorMessage: 'Feedback is required',
+            custom: {
+                options: (value) => {
+                    if (value === null || typeof value  !== 'object' || Object.keys(value).length === 0 ) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                },
+            },
+        }
+    },
 
 });

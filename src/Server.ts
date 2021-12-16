@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as cors from 'cors';
 import * as bodyparser from 'body-parser';
 import { errorHandler, notFoundRoute } from './libs/routes';
 import routes from './router';
@@ -25,6 +26,7 @@ export default class Server {
 
     }
     initBodyParser() {
+        this.app.use(cors());
         this.app.use(bodyparser.urlencoded({ extended: false }));
         this.app.use(bodyparser.json());
     }
