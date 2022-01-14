@@ -78,6 +78,7 @@ router
  */
 
      .post('/', authMiddleWare(getUsers, 'write'), validationHandler(validation.create), userController.create)
+     .get('/me', authMiddleWare(getUsers, 'read'), userController.getMe)
 
 /**
  * @swagger

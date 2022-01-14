@@ -1,6 +1,6 @@
 
 let str: string = '';
-const  createDiamondShape = (n: number): void => {
+const  createDiamondShape = (n: number): string => {
    let space: number = n - 1;
    for (let i: number = 0; i < n; i++) {
       for (let j: number = 0; j < space; j++) {
@@ -24,8 +24,7 @@ const  createDiamondShape = (n: number): void => {
       str += '\n';
       space++;
    }
-   console.log(str);
-
+return 'Diamond Printed!';
 };
 
 
