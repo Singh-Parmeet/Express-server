@@ -3,8 +3,8 @@ import { param } from 'express-validator';
 export default Object.freeze({
     create: {
         name: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Name is required',
             isLength: {
@@ -14,8 +14,8 @@ export default Object.freeze({
             },
         },
         role: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Role is required',
             isLength: {
@@ -25,8 +25,8 @@ export default Object.freeze({
             },
         },
         email: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Email is required',
             isLength: {
@@ -38,7 +38,7 @@ export default Object.freeze({
     },
     delete: {
         originalId: {
-            exists: true,
+            // exists: true,
             in: ['body'],
             errorMessage: 'Id is required',
             isLength: {
@@ -49,28 +49,28 @@ export default Object.freeze({
     },
     get: {
         skip: {
-            exists: true,
-            number: true,
+            // exists: true,
+            // number: true,
             in: [param],
             errorMessage: 'Skip is invalid',
         },
         limit: {
-            exist: true,
-            number: true,
+            // exist: true,
+            // number: true,
             in: [param],
             errorMessage: 'Limit is invalid',
         },
     },
     update: {
         originalId: {
-            string: true,
-            exists: true,
+           // string: true,
+            // exists: true,
             in: ['body'],
             errorMessage: 'Id is required',
         },
         name: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Name is required',
             isLength: {
@@ -80,8 +80,8 @@ export default Object.freeze({
             },
         },
         role: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Role is required',
             isLength: {
@@ -91,8 +91,8 @@ export default Object.freeze({
             },
         },
         email: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Email is required',
             isLength: {
@@ -104,7 +104,7 @@ export default Object.freeze({
     },
     feedback: {
         originalId: {
-            exists: true,
+            // exists: true,
             in: ['body'],
             errorMessage: 'Id is required',
             isLength: {
@@ -113,7 +113,7 @@ export default Object.freeze({
             }
         },
         feedback: {
-            exists: true,
+            // exists: true,
             in: ['body'],
             errorMessage: 'Feedback is required',
             custom: {

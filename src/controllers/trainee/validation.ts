@@ -1,8 +1,8 @@
 export default Object.freeze({
     create: {
         name: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Name is required',
             isLength: {
@@ -12,8 +12,8 @@ export default Object.freeze({
             },
         },
         role: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Role is required',
             isLength: {
@@ -23,8 +23,8 @@ export default Object.freeze({
             },
         },
         email: {
-            exists: true,
-            string: true,
+            // exists: true,
+            // string: true,
             in: ['body'],
             errorMessage: 'Email is required',
             isLength: {
@@ -36,7 +36,7 @@ export default Object.freeze({
     },
     delete: {
         originalId: {
-            exists: true,
+            // exists: true,
             in: ['body'],
             errorMessage: 'Id is required',
             isLength: {
@@ -47,23 +47,23 @@ export default Object.freeze({
     },
     get: {
         skip: {
-            exists: false,
+            // exists: false,
             default: 0,
-            number: true,
+            // number: true,
             in: ['query'],
             errorMessage: 'Skip is invalid',
         },
         limit: {
-            exist: false,
+            // exist: false,
             default: 10,
-            number: true,
+            // number: true,
             in: ['query'],
             errorMessage: 'Limit is invalid',
         },
     },
     update: {
         originalId: {
-            exists: true,
+            // exists: true,
             in: ['body'],
             errorMessage: 'Id is required',
         }
